@@ -9,17 +9,32 @@ const createBooking = async (req, res) => {
   try {
     const result = await bookingServcie.createBooking(req.body);
     SuccessResponse.result = result;
-    SuccessResponse.message = "Airplane Creation Successfull";
+    SuccessResponse.message = "Booking is Successfull";
     return res.json(SuccessResponse);
   } catch (error) {
     console.log("error in controller", error)
     ErrorResponse.error = error;
-    ErrorResponse.message = "Airplane Creation is Failed";
+    ErrorResponse.message = "Booking Creation is Failed";
+    res.json(ErrorResponse);
+  }
+}
+
+const makePayments = async (req, res) => {
+  try {
+    const result = await bookingServcie.makePayments(req.body);
+    SuccessResponse.result = result;
+    SuccessResponse.message = "payment is Successfull";
+    return res.json(SuccessResponse);
+  } catch (error) {
+    console.log("error in controller", error)
+    ErrorResponse.error = error;
+    ErrorResponse.message = "payment is failed";
     res.json(ErrorResponse);
   }
 }
 
 
 module.exports={
-    createBooking
+    createBooking,
+    makePayments
 }
